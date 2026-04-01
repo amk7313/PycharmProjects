@@ -2,7 +2,7 @@ import time
 import random
 import re
 from datetime import datetime
-from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+from playwright.sync_api import sync_playwright
 import AmazonScrapper as scraper
 import extract_variants_with_dimensions as ext
 from scraper_logger import log_block,scraper_logger
@@ -26,13 +26,20 @@ def scrape_product_page(page, asin: str):
         page.wait_for_selector("#productTitle", timeout=20000)
     # === CRITICAL WAIT FOR ICONS / VARIANTS TO LOAD ===
     #with log_block("Optional Icons/Variants Wait", asin, page=page):
-    try:
-        page.wait_for_selector(
-            'text="Returnable" OR text="Top Brand" OR text="Warranty" OR #twister',
-            timeout=8000
-        )
-    except PlaywrightTimeout:
-        scraper_logger.info(f"⏳ No icons/variants row found (normal for many products) | ASIN: {asin}")
+    optional_signals_found = False
+    wait_until = time.time() + 8
+    while time.time() < wait_until:
+        if (
+                page.locator("#twister").count() > 0
+                or page.get_by_text("Returnable", exact=False).count() > 0
+                or page.get_by_text("Top Brand", exact=False).count() > 0
+                or page.get_by_text("Warranty", exact=False).count() > 0
+        ):
+            optional_signals_found = True
+            break
+        time.sleep(0.4)
+    if not optional_signals_found:
+        scraper_logger.info(f"⏳ No icons/variants row found after optional wait | ASIN: {asin}")
     time.sleep(random.uniform(3, 6))
     # ==================== BASIC FIELDS ====================
     title = page.locator("#productTitle").inner_text(timeout=5000).strip() if page.query_selector("#productTitle") else "N/A"
@@ -154,7 +161,11 @@ def scrape_product_page(page, asin: str):
     with log_block("reviews_exact", asin, page=page):
         txt = page.query_selector("#acrCustomerReviewText")
         if txt:
-            reviews_exact = int(txt.inner_text().replace(",", "").split()[0])
+            #reviews_exact = int(txt.inner_text().replace(",", "").split()[0])
+            review_text = txt.inner_text().strip()
+            match = re.search(r"\d[\d,]*", review_text)
+            if match:
+                reviews_exact = int(match.group(0).replace(",", ""))
 
         # Scrape date
         scrape_date = datetime.now().strftime("%Y-%m-%d %H:%M")

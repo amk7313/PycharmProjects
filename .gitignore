@@ -1,6 +1,5 @@
 DEBUG/
 SCRAPPED_DATA/
-logs/
 .idea/
 __pycache__/
 *.pyc
