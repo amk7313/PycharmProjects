@@ -1,0 +1,63 @@
+2026-04-01 19:56:36,927 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0G2GNQK8F
+2026-04-01 19:56:37,511 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0G1CB9JC4
+2026-04-01 19:56:37,565 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B0FB9HRSCQ
+2026-04-01 19:56:41,373 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0G2GNQK8F
+2026-04-01 19:56:44,697 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0G1CB9JC4
+2026-04-01 19:56:46,785 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B0FB9HRSCQ
+2026-04-01 19:56:49,403 | INFO | ThreadPoolExecutor-0_0 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0G2GNQK8F
+2026-04-01 19:56:52,714 | INFO | ThreadPoolExecutor-0_1 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0G1CB9JC4
+2026-04-01 19:56:54,792 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0FB9HRSCQ
+2026-04-01 19:56:57,435 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B095X8PNTR
+2026-04-01 19:57:00,539 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B09XJ6Y21L
+2026-04-01 19:57:01,827 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B095X8PNTR
+2026-04-01 19:57:05,894 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B0FB9GT534
+2026-04-01 19:57:06,918 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B09XJ6Y21L
+2026-04-01 19:57:09,834 | INFO | ThreadPoolExecutor-0_0 | ⏳ No icons/variants row found (normal for many products) | ASIN: B095X8PNTR
+2026-04-01 19:57:11,512 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B0FB9GT534
+2026-04-01 19:57:14,933 | INFO | ThreadPoolExecutor-0_1 | ⏳ No icons/variants row found (normal for many products) | ASIN: B09XJ6Y21L
+2026-04-01 19:57:17,582 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0CH189D6D
+2026-04-01 19:57:19,534 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0FB9GT534
+2026-04-01 19:57:22,528 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0CH189D6D
+2026-04-01 19:57:22,674 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0D2TQZNLC
+2026-04-01 19:57:24,662 | INFO | ThreadPoolExecutor-0_2 | Starting BRAND | B0FB9GT534
+2026-04-01 19:57:24,723 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed BRAND | B0FB9GT534
+2026-04-01 19:57:24,724 | INFO | ThreadPoolExecutor-0_2 | Starting amazon_choice | top_brand | B0FB9GT534
+2026-04-01 19:57:24,837 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed amazon_choice | top_brand | B0FB9GT534
+2026-04-01 19:57:24,838 | INFO | ThreadPoolExecutor-0_2 | Starting bullets | features | B0FB9GT534
+2026-04-01 19:57:25,059 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed bullets | features | B0FB9GT534
+2026-04-01 19:57:25,059 | INFO | ThreadPoolExecutor-0_2 | Starting Warranty | B0FB9GT534
+2026-04-01 19:57:25,299 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Warranty | B0FB9GT534
+2026-04-01 19:57:25,299 | INFO | ThreadPoolExecutor-0_2 | Starting bsr | category | sub_category | B0FB9GT534
+2026-04-01 19:57:25,358 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed bsr | category | sub_category | B0FB9GT534
+2026-04-01 19:57:25,358 | INFO | ThreadPoolExecutor-0_2 | Starting buybox_seller | B0FB9GT534
+2026-04-01 19:57:25,367 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed buybox_seller | B0FB9GT534
+2026-04-01 19:57:25,367 | INFO | ThreadPoolExecutor-0_2 | Starting buybox_seller-full_text | B0FB9GT534
+2026-04-01 19:57:25,380 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed buybox_seller-full_text | B0FB9GT534
+2026-04-01 19:57:25,381 | INFO | ThreadPoolExecutor-0_2 | Starting price | mrp | discount_percent | B0FB9GT534
+2026-04-01 19:57:25,433 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed price | mrp | discount_percent | B0FB9GT534
+2026-04-01 19:57:25,434 | INFO | ThreadPoolExecutor-0_2 | Starting bought_in_last_month | B0FB9GT534
+2026-04-01 19:57:25,443 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed bought_in_last_month | B0FB9GT534
+2026-04-01 19:57:25,444 | INFO | ThreadPoolExecutor-0_2 | Starting manufacturer | B0FB9GT534
+2026-04-01 19:57:25,468 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed manufacturer | B0FB9GT534
+2026-04-01 19:57:25,468 | INFO | ThreadPoolExecutor-0_2 | Starting manufacturer | B0FB9GT534
+2026-04-01 19:57:25,780 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed manufacturer | B0FB9GT534
+2026-04-01 19:57:25,780 | INFO | ThreadPoolExecutor-0_2 | Starting image_count | B0FB9GT534
+2026-04-01 19:57:25,873 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed image_count | B0FB9GT534
+2026-04-01 19:57:25,874 | INFO | ThreadPoolExecutor-0_2 | Starting reviews_exact | B0FB9GT534
+2026-04-01 19:57:25,894 | ERROR | ThreadPoolExecutor-0_2 | ❌ Failed reviews_exact | B0FB9GT534
+Traceback (most recent call last):
+  File "C:\Users\alimo\Documents\PycharmProjects\PythonProject\scraper_logger.py", line 33, in log_block
+    yield
+  File "C:\Users\alimo\Documents\PycharmProjects\PythonProject\scrape_product_page.py", line 157, in scrape_product_page
+    reviews_exact = int(txt.inner_text().replace(",", "").split()[0])
+ValueError: invalid literal for int() with base 10: '(563)'
+2026-04-01 19:57:26,700 | INFO | ThreadPoolExecutor-0_2 | Debug captured | Data_Field: B0FB9GT534 | Type: critical
+2026-04-01 19:57:27,497 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0D2TQZNLC
+2026-04-01 19:57:30,546 | INFO | ThreadPoolExecutor-0_0 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0CH189D6D
+2026-04-01 19:57:31,085 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B0BYNDC8P8
+2026-04-01 19:57:34,519 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B0BYNDC8P8
+2026-04-01 19:57:35,503 | INFO | ThreadPoolExecutor-0_1 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0D2TQZNLC
+2026-04-01 19:57:39,311 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0C58BQX7Q
+2026-04-01 19:57:42,534 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0BYNDC8P8
+2026-04-01 19:57:42,964 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0C58BQX7Q
+2026-04-01 19:57:50,970 | INFO | ThreadPoolExecutor-0_0 | ⏳ No icons/variants row found (normal for many products) | ASIN: B0C58BQX7Q
