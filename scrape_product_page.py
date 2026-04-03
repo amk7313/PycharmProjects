@@ -163,13 +163,13 @@ def scrape_product_page(page, asin: str):
             except ValueError:
                 pass  # malformed price string
 
-            # Bought in last month
-            bought_in_last_month = None
-            bought_el = safe_extract("bought", lambda: page.locator('span.a-size-base').filter(
-                has_text=re.compile(r'\d+\s+bought?\s+in?\s+past?\s+month', re.I)).first, asin)
-            if bought_el.count() > 0:
-                bought_in_last_month = safe_extract("bought",
-                                                    lambda: bought_el.inner_text().strip(), asin)
+        # Bought in last month
+        bought_in_last_month = None
+        bought_el = safe_extract("bought", lambda: page.locator('span.a-size-base').filter(
+            has_text=re.compile(r'\d+\s+bought?\s+in?\s+past?\s+month', re.I)).first, asin)
+        if bought_el.count() > 0:
+            bought_in_last_month = safe_extract("bought",
+                                                lambda: bought_el.inner_text().strip(), asin)
         try:
             # ==================== FINAL RECORD ====================
             record = {
