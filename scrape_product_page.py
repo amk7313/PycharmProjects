@@ -128,17 +128,28 @@ def scrape_product_page(page, asin: str):
         if price_el:
             price = safe_extract("Price Text", lambda: price_el.inner_text().strip(), asin)
 
-        # 2. MRP - more specific selector + cleaning unit price
-        mrp_el = safe_extract("MRP",
-                              lambda: page.query_selector(
-                                  "#listPrice .a-offscreen, .a-text-price .a-offscreen, .a-price.a-text-price .a-offscreen"),
-                              asin)
-        if mrp_el:
-            mrp_text = safe_extract("MRP Text", lambda: mrp_el.inner_text().strip(), asin)
-            if mrp_text:
-                # Remove unit price suffix like "/100 ml" or "/100ml"
-                mrp_text = re.sub(r'\/.*$', '', mrp_text).strip()
-                mrp = mrp_text
+        # 2. MRP - only pick basis/list price (avoid per-unit price such as "₹771.11 /100 ml")
+        mrp_selectors = [
+                "#corePriceDisplay_desktop_feature_div .basisPrice .a-price.a-text-price .a-offscreen",
+                "#corePriceDisplay_desktop_feature_div .apex-basisprice-value .a-offscreen",
+                "#corePriceDisplay_desktop_feature_div #listPrice .a-offscreen",
+                "#corePriceDisplay_desktop_feature_div .basisPrice .a-offscreen",
+        ]
+        mrp_text = None
+        for sel in mrp_selectors:
+            mrp_el = safe_extract("MRP", lambda sel=sel: page.query_selector(sel), asin)
+            if not mrp_el:
+                continue
+            candidate = safe_extract("MRP Text", lambda: mrp_el.inner_text().strip(), asin)
+            if not candidate:
+                continue
+            # Strict currency-like extraction; rejects strings without a Rupee amount.
+            amount_match = re.search(r'₹\s?[\d,]+(?:\.\d{1,2})?', candidate)
+            if amount_match:
+                mrp_text = amount_match.group(0).strip()
+                break
+        if mrp_text:
+            mrp = mrp_text
 
         # 3. Calculate discount (safe)
         if price and mrp:

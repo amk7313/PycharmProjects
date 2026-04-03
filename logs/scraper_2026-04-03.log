@@ -60,3 +60,10 @@ Call log:
 2026-04-03 17:42:03,226 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B0F1TDDNGD
 2026-04-03 17:42:04,009 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GJ5ZTWGJ
 2026-04-03 17:42:06,800 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0BXNVPRGS
+2026-04-03 18:16:35,027 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B0BXNVPRGS
+2026-04-03 18:16:35,334 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GJ5ZTWGJ
+2026-04-03 18:16:35,570 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0F1TDDNGD
+2026-04-03 18:16:51,383 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0F1TDDNGD
+2026-04-03 18:16:52,672 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0F1TDDNGD
+2026-04-03 18:16:52,982 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GJ5ZTWGJ
+2026-04-03 18:16:53,665 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B0BXNVPRGS
