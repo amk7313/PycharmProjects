@@ -1,121 +1,40 @@
-2026-04-03 20:48:01,137 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:48:01,294 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:48:01,522 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:48:10,143 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 20:48:10,266 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 20:48:10,344 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 20:48:10,751 | ERROR | ThreadPoolExecutor-0_1 | Failed to capture debug for B0GDQMYLT8: BIG ERROR
-2026-04-03 20:48:10,751 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:48:11,826 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 20:48:11,932 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 20:48:12,009 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 20:48:12,454 | ERROR | ThreadPoolExecutor-0_0 | Failed to capture debug for B0DFTW7FGD: BIG ERROR
-2026-04-03 20:48:12,454 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:48:15,634 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 20:48:20,545 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,619 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,625 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,645 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,652 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,659 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:48:20,899 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:49:47,834 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:49:48,003 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:49:48,320 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:49:57,698 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 20:49:57,810 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 20:49:57,906 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 20:49:58,353 | ERROR | ThreadPoolExecutor-0_0 | Failed to capture debug for B0DFTW7FGD: BIG ERROR
-2026-04-03 20:49:58,353 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:50:01,434 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 20:50:01,528 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 20:50:01,580 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 20:50:01,771 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 20:50:01,909 | ERROR | ThreadPoolExecutor-0_1 | Failed to capture debug for B0GDQMYLT8: BIG ERROR
-2026-04-03 20:50:01,909 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:50:05,766 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 20:50:05,870 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:50:05,879 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:50:05,907 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:50:05,919 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:50:05,930 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:50:06,199 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:53:31,298 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:53:31,408 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:53:31,814 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:53:42,662 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 20:53:42,800 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 20:53:42,915 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 20:53:43,463 | ERROR | ThreadPoolExecutor-0_0 | Failed to capture debug for B0DFTW7FGD: cannot access local variable 'bullet_points_count' where it is not associated with a value
-2026-04-03 20:53:43,464 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:53:43,793 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 20:53:43,972 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 20:53:44,064 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 20:53:44,408 | ERROR | ThreadPoolExecutor-0_1 | Failed to capture debug for B0GDQMYLT8: cannot access local variable 'bullet_points_count' where it is not associated with a value
-2026-04-03 20:53:44,408 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:53:47,641 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 20:53:52,752 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 20:53:52,818 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:53:52,825 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:53:52,839 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:53:52,847 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:53:52,853 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:53:53,091 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:55:57,596 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 20:55:58,117 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:55:58,314 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:56:07,199 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 20:56:07,334 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 20:56:07,401 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 20:56:07,780 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 20:56:09,154 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 20:56:09,245 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 20:56:09,312 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 20:56:09,668 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 20:56:11,449 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 20:56:15,463 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,529 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,537 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,555 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,570 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,577 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 20:56:15,813 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
-2026-04-03 21:00:42,829 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 21:00:42,999 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 21:00:43,079 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 21:00:53,947 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 21:00:54,128 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 21:00:54,206 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 21:00:54,757 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 21:00:54,758 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 21:00:54,887 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 21:00:55,064 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 21:00:55,606 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 21:00:58,262 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 21:01:04,380 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,452 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,458 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,471 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,487 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,493 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:01:04,661 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
-2026-04-03 21:12:43,852 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
-2026-04-03 21:12:43,926 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 21:12:44,079 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 21:12:58,946 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
-2026-04-03 21:12:59,049 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
-2026-04-03 21:12:59,112 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
-2026-04-03 21:12:59,526 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
-2026-04-03 21:13:00,563 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
-2026-04-03 21:13:01,665 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
-2026-04-03 21:13:01,764 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
-2026-04-03 21:13:01,835 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
-2026-04-03 21:13:02,160 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
-2026-04-03 21:13:06,713 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
-2026-04-03 21:13:06,780 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:13:06,785 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:13:06,799 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:13:06,814 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:13:06,823 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
-2026-04-03 21:13:07,040 | WARNING | ThreadPoolExecutor-0_2 | Child ASINS empty | DataField: B07PS7CHT6
-2026-04-03 21:13:07,040 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
+2026-04-03 22:32:50,836 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
+2026-04-03 22:32:51,253 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
+2026-04-03 22:32:51,674 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
+2026-04-03 22:33:00,651 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
+2026-04-03 22:33:00,777 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
+2026-04-03 22:33:01,232 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
+2026-04-03 22:33:03,569 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
+2026-04-03 22:33:04,508 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
+2026-04-03 22:33:04,668 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
+2026-04-03 22:33:04,741 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
+2026-04-03 22:33:07,500 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
+2026-04-03 22:33:08,749 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
+2026-04-03 22:33:09,034 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,127 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,136 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,156 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,165 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,175 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:33:09,493 | WARNING | ThreadPoolExecutor-0_2 | Child ASINS empty | DataField: B07PS7CHT6
+2026-04-03 22:33:16,413 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6
+2026-04-03 22:39:27,369 | INFO | ThreadPoolExecutor-0_2 | Starting Product Parameters Extraction | B07PS7CHT6
+2026-04-03 22:39:27,421 | INFO | ThreadPoolExecutor-0_1 | Starting Product Parameters Extraction | B0GDQMYLT8
+2026-04-03 22:39:27,426 | INFO | ThreadPoolExecutor-0_0 | Starting Product Parameters Extraction | B0DFTW7FGD
+2026-04-03 22:39:40,492 | WARNING | ThreadPoolExecutor-0_1 | Features empty | DataField: B0GDQMYLT8
+2026-04-03 22:39:40,620 | WARNING | ThreadPoolExecutor-0_1 | Warranty empty | DataField: B0GDQMYLT8
+2026-04-03 22:39:40,674 | WARNING | ThreadPoolExecutor-0_1 | Price Text empty | DataField: B0GDQMYLT8
+2026-04-03 22:39:42,373 | WARNING | ThreadPoolExecutor-0_0 | Features empty | DataField: B0DFTW7FGD
+2026-04-03 22:39:42,478 | WARNING | ThreadPoolExecutor-0_0 | Warranty empty | DataField: B0DFTW7FGD
+2026-04-03 22:39:42,573 | WARNING | ThreadPoolExecutor-0_0 | Price Text empty | DataField: B0DFTW7FGD
+2026-04-03 22:39:42,713 | INFO | ThreadPoolExecutor-0_2 | ⏳ No icons/variants row found after optional wait | ASIN: B07PS7CHT6
+2026-04-03 22:39:43,878 | INFO | ThreadPoolExecutor-0_1 | ✅ Completed Product Parameters Extraction | B0GDQMYLT8
+2026-04-03 22:39:45,540 | INFO | ThreadPoolExecutor-0_0 | ✅ Completed Product Parameters Extraction | B0DFTW7FGD
+2026-04-03 22:39:46,450 | WARNING | ThreadPoolExecutor-0_2 | Warranty empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,510 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,514 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,526 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,542 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,547 | WARNING | ThreadPoolExecutor-0_2 | bought empty | DataField: B07PS7CHT6
+2026-04-03 22:39:46,713 | WARNING | ThreadPoolExecutor-0_2 | Child ASINS empty | DataField: B07PS7CHT6
+2026-04-03 22:39:48,528 | INFO | ThreadPoolExecutor-0_2 | ✅ Completed Product Parameters Extraction | B07PS7CHT6

@@ -193,7 +193,8 @@ def scrape_product_page(page, asin: str):
 
         # Child ASINs (variants) - must extract before closing page
         child_asins = safe_extract("Child ASINS",lambda: eCA.extract_child_asins(page, asin),asin)
-
+        variants_info = safe_extract("Variants", lambda: ext.extract_variants_with_dimensions
+        (page, asin), asin)
         try:
             # ==================== FINAL RECORD ====================
             record = {
@@ -218,7 +219,7 @@ def scrape_product_page(page, asin: str):
             #"manufacturer": manufacturer,
             # Child ASINs with full dimension mapping
             "child_asins": child_asins,
-            #variants": variants_info["variants"] if variants_info else [],
+            "variants": variants_info,
             #"dimensions": variants_info["dimensions"] if variants_info else [],
             }
             """title_length": title_length,
@@ -238,4 +239,3 @@ def scrape_product_page(page, asin: str):
     page.close()
     time.sleep(random.uniform(4, 8))
     return all_data
-#OKKKK
