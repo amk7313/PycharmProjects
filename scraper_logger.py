@@ -23,11 +23,38 @@ scraper_logger = logging.getLogger(__name__)
 
 from contextlib import contextmanager
 
+
+@contextmanager
+def log_block(label: str, identifier: str, page=None, raise_on_error: bool = False):
+    """
+    Clean wrapper for any block.
+    - Logs start / success / failure automatically
+    - Captures debug screenshot + HTML on error
+    - By default (raise_on_error=False) it logs the error but **continues** execution
+    - Set raise_on_error=True only for truly critical blocks (e.g. page load)
+    """
+    scraper_logger.info(f"Starting {label} | {identifier}")
+
+    try:
+        yield
+        scraper_logger.info(f"✅ Completed {label} | {identifier}")
+    except Exception as e:
+        scraper_logger.exception(f"❌ Failed {label} | {identifier}")
+
+        if page is not None:
+            capture_debug(page, identifier, "critical")
+
+        log_failure(identifier, str(e))
+
+        if raise_on_error:
+            raise  # only re-raise if you explicitly want to stop the function
+        # else: silently continue (this is the new default behavior)
+
+"""from contextlib import contextmanager
+
 @contextmanager
 def log_block(label: str, identifier: str, page=None):
-    """
-    Clean way to wrap any block of code with automatic success/failure logging.
-    """
+    #Clean way to wrap any block of code with automatic success/failure logging.
     scraper_logger.info(f"Starting {label} | {identifier}")
     try:
         yield
@@ -37,7 +64,7 @@ def log_block(label: str, identifier: str, page=None):
         if page is not None:
             capture_debug(page, identifier, "critical")
         log_failure(identifier, str(e))
-        raise   # re-raise so outer logic can continue if needed
+        raise   # re-raise so outer logic can continue if needed"""
 
 
 def safe_query(label: str, selector: str, container, asin: str = "", many: bool = False):

@@ -43,9 +43,9 @@ class AmazonScraperMT:
                         flat_asins.append(str(parsed))
                 except (ValueError, SyntaxError, TypeError):
                     continue
-            return list(set(flat_asins))[:10],
+            return list(set(flat_asins))[:3],
 
-        return list(set(self.df["asin"].dropna().astype(str).tolist()))[:10]
+        return list(set(self.df["asin"].dropna().astype(str).tolist()))[:3]
         # For testing purpose only:
         #return ["B06Y2CH63N","B0DZ2G11VV","B0CCBZMQFJ"]
 
