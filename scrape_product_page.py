@@ -7,6 +7,7 @@ import AmazonScrapper as scraper
 import extract_variants_with_dimensions as ext
 from PythonProject.scraper_logger import safe_extract
 from scraper_logger import log_block,scraper_logger
+import extractChildAsins as eCA
 
 if __name__ == "__main__":
     scraper = scraper.AmazonScraperMT(
@@ -61,6 +62,7 @@ def scrape_product_page(page, asin: str):
                                                      page.query_selector_all
                                                      ("#feature-bullets li span.a-list-item") if
                                                      b.inner_text().strip()], asin)
+        bullet_points_count = []
         if features:
             bullet_points_count = len(features)
         #warranty = safe_extract("Warranty", lambda: (
@@ -165,11 +167,33 @@ def scrape_product_page(page, asin: str):
 
         # Bought in last month
         bought_in_last_month = None
-        bought_el = safe_extract("bought", lambda: page.locator('span.a-size-base').filter(
-            has_text=re.compile(r'\d+\s+bought?\s+in?\s+past?\s+month', re.I)).first, asin)
-        if bought_el.count() > 0:
-            bought_in_last_month = safe_extract("bought",
-                                                lambda: bought_el.inner_text().strip(), asin)
+        bought_regex = re.compile(
+            r'(?:\d[\d,]*\.?\d*\s*[KMB]?\+?)\s+'
+            r'(?:bought|ordered|purchased)\s+in\s+past\s+month',
+            re.I
+        )
+        bought_selectors = [
+            "#social-proofing-faceout-title-tk_bought",
+            "#socialProofingAsinFaceout_feature_div",
+            "#socialProofingAsinFaceout_feature_div span",
+            "span.a-size-base.a-color-secondary",
+            "span.a-size-small",
+        ]
+        for selector in bought_selectors:
+            candidate = safe_extract(
+                "bought",
+                lambda selector=selector: page.locator(selector).filter(has_text=bought_regex).
+                first.inner_text().strip()
+                if page.locator(selector).filter(has_text=bought_regex).count() > 0 else None,
+                asin
+            )
+            if candidate:
+                bought_in_last_month = re.sub(r"\s+", " ", candidate).strip()
+                break
+
+        # Child ASINs (variants) - must extract before closing page
+        child_asins = safe_extract("Child ASINS",lambda: eCA.extract_child_asins(page, asin),asin)
+
         try:
             # ==================== FINAL RECORD ====================
             record = {
@@ -181,7 +205,7 @@ def scrape_product_page(page, asin: str):
             "amazon_choice": amazon_choice,
             "top_brand": top_brand,
             "features": features,
-            "bullet_points_count": bullet_points_count if bullet_points_count else None,
+            "bullet_points_count": bullet_points_count,
             "warranty": warranty,
             "bsr": bsr,
             "category":  category,
@@ -190,14 +214,14 @@ def scrape_product_page(page, asin: str):
             "price": price,
             "mrp": mrp,
             "discount_percent": discount_percent,
-                "bought_in_last_month": bought_in_last_month,
+            "bought_in_last_month": bought_in_last_month,
+            #"manufacturer": manufacturer,
+            # Child ASINs with full dimension mapping
+            "child_asins": child_asins,
+            #variants": variants_info["variants"] if variants_info else [],
+            #"dimensions": variants_info["dimensions"] if variants_info else [],
             }
             """title_length": title_length,
-            "manufacturer": manufacturer,
-            
-            
-            
-            
             "top_brand": top_brand,
             "reviews_exact": reviews_exact,
             "bsr": bsr,
@@ -207,18 +231,10 @@ def scrape_product_page(page, asin: str):
             "image_count": image_count,
             
             "size_weight": size_weight,
-            "scrape_date": scrape_date,
-
-            # Child ASINs with full dimension mapping
-            "child_asins": variants_info["child_asins"] if variants_info else [],
-            "variants": variants_info["variants"] if variants_info else [],
-            "dimensions": variants_info["dimensions"] if variants_info else [],"""
-
-        except:
-            scraper_logger.error(f"Failed to capture debug for {asin}: {"BIG ERROR"}")
-
-        all_data.append(record)
-
+            "scrape_date": scrape_date,"""
+            all_data.append(record)
+        except Exception as e:
+            scraper_logger.error(f"Failed to capture debug for {asin}: {e}")
     page.close()
     time.sleep(random.uniform(4, 8))
     return all_data

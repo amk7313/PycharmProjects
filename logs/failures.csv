@@ -1,5 +1,0 @@
-B0DSLP1Y43,could not convert string to float: '86.4786.47',2026-04-03T17:15:02.462674
-productPage,"Page.wait_for_selector: Timeout 20000ms exceeded.
-Call log:
-  - waiting for locator(""#productTitle"") to be visible
-",2026-04-03T17:15:12.854699

@@ -19,7 +19,7 @@ def scrape_amazon(page) -> list:
     seen_asins = set()
 
     keywords = [
-        "best seller"
+        "mens clothing"
     ]
     sort_options = [""]
 

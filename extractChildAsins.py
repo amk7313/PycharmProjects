@@ -1,50 +1,65 @@
 import re
+import json
 
 def extract_child_asins(page, parent_asin: str):
     """
-    Collect variant (child) ASINs available on the PDP.
-    Strategy:
-      - Twister links/buttons that contain /dp/{ASIN} or data-defaultasin
-      - Embedded JSON blobs in page HTML (asinVariationValues / dimensionToAsinMap)
-    Returns: sorted unique list excluding parent_asin.
+    Extracts ONLY true child ASINs (variants) of the current product.
+    Ignores all unrelated products on the page.
+    Works for products with AND without variants.
     """
-    parent_asin = (parent_asin or "").strip()
+    parent_asin = (parent_asin or "").strip().upper()
     found = set()
 
-    # 1) Twister swatches often have direct dp links
     try:
-        for a in page.query_selector_all("#twister a[href*='/dp/'], #twister a[href*='dp/']"):
-            href = (a.get_attribute("href") or "")
-            m = re.search(r"/dp/([A-Z0-9]{10})", href, re.I)
-            if m:
+        # 1. Target ONLY the #twister section (where real variants live)
+        twister = page.locator("#twister")
+        if twister.count() > 0:
+            twister_html = twister.inner_html()
+
+            # a) Variation links inside twister
+            for m in re.finditer(r'href=[\'"](/dp/([A-Z0-9]{10}))', twister_html, re.I):
+                found.add(m.group(2).upper())
+
+            # b) Data attributes on variation buttons
+            for m in re.finditer(r'data-(?:default)?asin=[\'"]([A-Z0-9]{10})', twister_html, re.I):
                 found.add(m.group(1).upper())
-    except Exception:
-        pass
 
-    # 2) Some nodes store ASIN in attributes
-    try:
-        for el in page.query_selector_all("#twister [data-defaultasin], #twister [data-asin]"):
-            for attr in ("data-defaultasin", "data-asin"):
-                v = (el.get_attribute(attr) or "").strip()
-                if re.fullmatch(r"[A-Z0-9]{10}", v, re.I):
-                    found.add(v.upper())
-    except Exception:
-        pass
-
-    # 3) Embedded JSON fallback (covers cases where twister isn't link-based)
-    try:
+        # 2. Hidden variation JSON (most reliable method for complex variants)
         html = page.content()
-        # common keys that hold ASINs in variation maps
-        for key in ("asinVariationValues", "dimensionToAsinMap", "dimensionToAsinMapString"):
-            if key in html:
-                # Extract any 10-char ASIN tokens near these keys
-                for m in re.finditer(rf"{re.escape(key)}[\s\S]{{0,40000}}?([A-Z0-9]{{10}})", html, re.I):
-                    found.add(m.group(1).upper())
-        # broad but safe: any /dp/ASIN in HTML
-        for m in re.finditer(r"/dp/([A-Z0-9]{10})", html, re.I):
-            found.add(m.group(1).upper())
-    except Exception:
-        pass
 
-    found.discard(parent_asin.upper())
+        json_patterns = [
+            r'asinVariationValues["\s:]*(\{[^}]+\})',
+            r'dimensionToAsinMap["\s:]*(\{[^}]+\})',
+            r'variationValues["\s:]*(\{[^}]+\})',
+            r'"dimensionToAsinMap"\s*:\s*(\{[^}]+\})',
+        ]
+
+        for pattern in json_patterns:
+            for match in re.finditer(pattern, html, re.I | re.DOTALL):
+                json_str = match.group(1)
+                try:
+                    # Some JSON is truncated; fix it
+                    if not json_str.endswith('}'):
+                        json_str += '}'
+                    data = json.loads(json_str)
+
+                    def extract_asins(obj):
+                        if isinstance(obj, dict):
+                            for k, v in obj.items():
+                                if isinstance(v, str) and re.fullmatch(r'[A-Z0-9]{10}', v, re.I):
+                                    found.add(v.upper())
+                                else:
+                                    extract_asins(v)
+                        elif isinstance(obj, list):
+                            for item in obj:
+                                extract_asins(item)
+
+                    extract_asins(data)
+                except:
+                    continue
+
+    except Exception:
+        pass  # Never crash the scraper
+
+    found.discard(parent_asin)
     return sorted(found)

@@ -49,7 +49,7 @@ class AmazonScraperMT:
 
         #return list(set(self.df["asin"].dropna().astype(str).tolist()))[:3]
         # For testing purpose only:
-        return ["B0F1TDDNGD", "B0GJ5ZTWGJ", "B0BXNVPRGS"]
+        return ["B0DFTW7FGD", "B0GDQMYLT8", "B07PS7CHT6"]
         #return ["B06Y2CH63N","B0DZ2G11VV","B0CCBZMQFJ"]
 
     def save(self, all_results: list):
