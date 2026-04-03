@@ -238,3 +238,4 @@ def scrape_product_page(page, asin: str):
     page.close()
     time.sleep(random.uniform(4, 8))
     return all_data
+#OKKKK
