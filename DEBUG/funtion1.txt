@@ -1,0 +1,17 @@
+ # Price, MRP, Discount Gap
+        price = None
+        mrp = None
+        discount_percent = None
+        price_el = safe_extract("price", lambda: page.query_selector(".a-price .a-offscreen"), asin)
+        if price_el:
+            price = safe_extract("price", lambda: price_el.inner_text().strip(), asin)
+            mrp_el = safe_extract("MRP", lambda: page.query_selector("#listPrice, "
+                                                                     ".a-text-price span.a-price.a-text-price, "
+                                                                     ".a-price.a-text-price"), asin)
+        if mrp_el:
+            mrp = safe_extract("MRP", lambda: mrp_el.inner_text().strip(), asin)
+        if price and mrp:
+            p = float(re.sub(r'[^\d.]', '', price))
+            m = float(re.sub(r'[^\d.]', '', mrp))
+            if m > 0:
+                discount_percent = round((m - p) / m * 100, 2)

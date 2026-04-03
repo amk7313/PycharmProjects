@@ -1,0 +1,154 @@
+
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+import time
+import pandas as pd
+import re
+import os
+import random
+from datetime import datetime
+
+def get_random_user_agent() -> str:
+    agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0",
+    ]
+    return random.choice(agents)
+
+def run_from_csv(file_path):
+    df = pd.read_csv(file_path)
+    # Clean ASINs
+    asins = (
+        df["asin"]
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .unique()
+    )
+
+    print(f"Total ASINs: {len(asins)}\n")
+
+    flag = 0
+    if flag == 1:
+        pass
+    else:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(
+                headless=False,  # Set True for production
+                args=['--disable-blink-features=AutomationControlled']
+            )
+
+            context = browser.new_context(
+                user_agent=get_random_user_agent(),
+                viewport={"width": 1366, "height": 768},
+                locale="en-IN",
+            )
+
+            # Stealth injections
+            context.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+                Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
+                Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+            """)
+            for i, asin in enumerate(asins, 1):
+                results = 0
+                try:
+                    print(f"[{i}/{len(asins)}]", end=" ")
+                    for attempt in range(3):
+                        try:
+                            results = scrape_product_page(context,asin)
+                            break
+                        except Exception as e:
+                            time.sleep(random.uniform(3, 6))
+                            if attempt == 2:
+                                results = None
+                    flag = 1
+                    if not results:
+                        print("⚠️ No products scraped. Amazon may have blocked the session.")
+                    else:
+                        new_df = pd.DataFrame(results)
+                        new_df = new_df.drop_duplicates(subset=["asin"])
+                        file_name = "amazon_products_Insights.csv"
+                        if os.path.exists(file_name):
+                            old_df = pd.read_csv(file_name)
+                            combined = pd.concat([old_df, new_df], ignore_index=True)
+                            combined = combined.drop_duplicates(subset=["asin"], keep="last")
+                        else:
+                            combined = new_df
+
+                        combined.to_csv(file_name, index=False)
+                        print(f"✅ Success! Total unique products saved: {len(combined)}")
+                        print(f"📁 File: {file_name}")
+                except Exception as e:
+                    print(f"❌ Error for {asin}: {e}")
+            browser.close()
+
+
+
+def scrape_product_page(context,asin):
+    all_data = []
+    url = f"https://www.amazon.in/dp/{asin}"
+    page = context.new_page()
+    page.goto(url)
+    page.wait_for_selector("#productTitle", timeout=10000)
+    time.sleep(2)
+
+    # Brand
+    try:
+        el = page.query_selector("#bylineInfo")
+        brand = el.inner_text().strip() if el else None
+    except:
+        brand = None
+
+    # Amazon Choice
+    amazon_choice = bool(page.query_selector("#acBadge_feature_div"))
+    # Top Brand
+    top_brand = bool(page.query_selector("#brandBadge_feature_div"))
+    # Features
+    try:
+        bullets = page.query_selector_all("#feature-bullets li span")
+        features = []
+        for b in bullets:
+            text = b.inner_text().strip()
+            if text:
+                features.append(text)
+    except:
+        features = []
+    # Warranty
+    warranty = None
+    try:
+        rows = page.query_selector_all("#productDetails_techSpec_section_1 tr")
+        for row in rows:
+            k = row.query_selector("th")
+            v = row.query_selector("td")
+            if k and v and "warranty" in k.inner_text().lower():
+                warranty = v.inner_text().strip()
+                break
+    except:
+        pass
+    # Reviews (accurate)
+    try:
+        txt = page.query_selector("#acrCustomerReviewText").inner_text()
+        reviews_exact = int(txt.replace(",", "").split()[0])
+    except:
+        reviews_exact = None
+    page.close()
+    #return all_data
+    all_data.append({
+            "asin": asin,
+            "brand": brand,
+            "features": features,
+            "warranty": warranty,
+            "amazon_choice": amazon_choice,
+            "top_brand": top_brand,
+            "reviews_exact": reviews_exact,
+            "scrape_date": datetime.now().strftime("%Y-%m-%d %H:%M")
+        })
+    # Polite delay between pages
+    time.sleep(random.uniform(4, 8))
+    return all_data
+
+# Run
+run_from_csv("amazon_products.csv")
+
+            

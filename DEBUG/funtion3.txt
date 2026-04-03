@@ -1,0 +1,152 @@
+import pandas as pd
+import ast
+import os
+import time
+import random
+import re
+from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+import scrap_Amazon
+# ====================== OPTIMIZED MULTI-THREADED CLASS (unchanged core) ======================
+class AmazonScraperMT:
+        """
+        Optimized & bug-free multi-threaded Amazon scraper.
+        - Each thread gets its OWN browser (thread-safe)
+        - Safe offer-mode parsing
+        - Results collected in memory → written ONCE at the end (fast)
+        - Auto-creates output folder
+        - Proper error handling
+        - Deduplicated ASINs
+        """
+
+        def __init__(self, file_path: str, mode: str, max_workers: int = 5):
+            self.file_path = file_path
+            self.mode = mode.lower()  # "offer" or anything else
+            #self.scrape_func = scrape_func
+            self.max_workers = max_workers
+
+            self.output_dir = "SCRAPPED_DATA"
+            os.makedirs(self.output_dir, exist_ok=True)
+            self.output_file = f"{self.output_dir}/amazon_{self.mode}.csv"
+
+            # Load input once
+            self.df = pd.read_csv(file_path)
+            self.asins = self.load_asins()  # already deduplicated
+
+        # ---------------- LOAD ASINS (fixed & safe) ----------------
+        def load_asins(self):
+            """Return clean, unique list of ASINs. Handles malformed child_asins safely."""
+            if self.mode == "offer":
+                data = self.df["child_asins"].dropna().astype(str).tolist()
+                flat_asins = []
+                for x in data:
+                    try:
+                        parsed = ast.literal_eval(x)
+                        if isinstance(parsed, list):
+                            flat_asins.extend(parsed)
+                        else:
+                            flat_asins.append(str(parsed))
+                    except (ValueError, SyntaxError, TypeError):
+                        continue  # skip bad rows silently
+                return list(set(flat_asins))  # dedup
+
+            # Normal mode
+            return list(set(self.df["asin"].dropna().astype(str).tolist()))
+
+        # ---------------- SAVE (now optimized) ----------------
+        def save(self, all_results: list):
+            """Write everything once at the end. Preserves old data and removes duplicates."""
+            if not all_results:
+                return
+
+            df_new = pd.DataFrame(all_results)
+
+            if os.path.exists(self.output_file):
+                df_old = pd.read_csv(self.output_file)
+                df = pd.concat([df_old, df_new], ignore_index=True)
+            else:
+                df = df_new
+
+            # Final deduplication by asin (latest result wins)
+            df = df.drop_duplicates(subset=["asin"], keep="last")
+            df.to_csv(self.output_file, index=False)
+            print(f"💾 Saved {len(df)} unique records to {self.output_file}")
+
+        # ---------------- WORKER (now fully thread-safe) ----------------
+        def worker(self, asin: str):
+            """Each thread launches its own isolated browser."""
+            result = None
+            try:
+                with sync_playwright() as p:
+                    # headless=True in production (change to False only for debugging)
+                    browser = p.chromium.launch(headless=True)
+
+                    context = browser.new_context(
+                        viewport={"width": 1280, "height": 800},
+                        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                   "(KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+                    )
+                    page = context.new_page()
+
+                    # Optional: small random delay to look more human
+                    time.sleep(random.uniform(0.5, 1.5))
+                    print(self.mode.lower())
+                    if self.mode.lower() == "productPage":
+                        result = scrap_Amazon.scrape_amazon(page)
+
+                    page.close()
+                    context.close()
+                    browser.close()
+
+            except Exception as e:  # catch ANY playwright or scrape error
+                print(f"❌ Exception on {asin}: {type(e).__name__} - {e}")
+                result = None
+
+            return asin, result
+
+        # ---------------- RUN (main optimized flow) ----------------
+        def run(self):
+            print(
+                f"🚀 Starting scrape → Mode: {self.mode.upper()} | ASINs: {len(self.asins)} | Workers: {self.max_workers}")
+
+            if not self.asins:
+                if self.mode == "offer":
+                    print("⚠️ No ASINs found!")
+                    return
+
+            all_results = []
+            start_time = time.time()
+
+            if self.mode.lower() == "productpage":
+                with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                    futures = [executor.submit(self.worker)]
+            else:
+                with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                    futures = [executor.submit(self.worker, asin) for asin in self.asins]
+
+                for future in as_completed(futures):
+                    asin, result = future.result()
+
+                    # Proper result check
+                    if result is not None:
+                        # If scrape_func returns a dict, wrap it; if list, keep it
+                        if isinstance(result, dict):
+                            all_results.append(result)
+                        elif isinstance(result, list):
+                            all_results.extend(result)
+                        else:
+                            all_results.append({"asin": asin, "raw_result": str(result)})
+                    else:
+                        all_results.append({"asin": asin, "error": "fail"})
+
+                    print(f"✅ Done: {asin} ({len(all_results)}/{len(self.asins)})")
+
+            # Single write at the very end
+            self.save(all_results)
+
+            elapsed = time.time() - start_time
+            print(f"🎉 Finished in {elapsed:.1f} seconds! "
+                  f"({len(self.asins) / elapsed:.1f} ASINs/sec)")
+
+

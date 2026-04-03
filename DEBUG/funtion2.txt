@@ -1,0 +1,49 @@
+import logging
+import os
+from datetime import datetime
+import csv
+
+
+LOG_DIR = "logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+
+log_file = os.path.join(LOG_DIR, f"scraper_{datetime.now().strftime('%Y-%m-%d')}.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(threadName)s | %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+
+)
+
+logger = logging.getLogger(__name__)
+
+def safe_extract(label, func, asin):
+    try:
+        value = func()
+        if not value:
+            logger.warning(f"{label} empty | ASIN: {asin}")
+        return value
+    except Exception:
+        logger.exception(f"{label} extraction failed | ASIN: {asin}")
+        return None
+
+
+def capture_debug(page, asin, error_type="error"):
+    timestamp = datetime.now().strftime("%H%M%S")
+    file_base = f"{asin}_{error_type}_{timestamp}"
+
+    page.screenshot(path=f"logs/{file_base}.png")
+
+    with open(f"logs/{file_base}.html", "w", encoding="utf-8") as f:
+        f.write(page.content())
+
+    logger.info(f"Captured debug files for ASIN: {asin}")
+
+def log_failure(asin, reason):
+    with open("logs/failures.csv", "a", newline='', encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow([asin, reason, datetime.now()])
